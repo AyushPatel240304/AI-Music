@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+
+body{
+    margin: 0;
+    padding: 0;
+    background: #232323;
+    overflow: hidden; /* Prevent scrollbars during zoom */
+    transform-origin: center;
+    animation : fadeIn 1s ease-in;
+}
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(5); /* Adjust the scale value as needed */
+        opacity: 0; /* Fade out to make the transition smoother */
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+span{
+    font-family: "Michroma", sans-serif;
+
+}
+
+.center
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+
+}
+
+.ring
+{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: ring 2s linear infinite;
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0deg);
+        box-shadow: 1px 5px 2px #e65c00; /* Starting color */
+    }
+    33% {
+        box-shadow: 1px 5px 2px #18b201; /* Transition to second color */
+    }
+    66% {
+        box-shadow: 1px 5px 2px #0456c8; /* Transition to third color */
+    }
+    100% {
+        transform: rotate(360deg);
+        box-shadow: 1px 5px 2px #e65c00; /* Back to starting color */
+    }
+}
+
+.ring::before
+{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, .3);
+}
+
+span {
+    color: #737373;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 200px;
+    animation: textFade 3s ease-in-out infinite;
+}
+
+@keyframes textFade {
+    0% {
+        color: #6e6e6e;
+    }
+    50% {
+        color: #232323; /* Or any other color you wish to transition to */
+    }
+    100% {
+        color: #737373;
+    }
+}
