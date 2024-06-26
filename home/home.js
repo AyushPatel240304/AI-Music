@@ -24,15 +24,5 @@
                 setActiveClass(event.target);
             });
         });
-    
-        // Retrieve and set active class from localStorage
-        const activeNavId = localStorage.getItem('activeNav');
-        if (activeNavId) {
-            const activeElement = document.getElementById(activeNavId);
-            if (activeElement) {
-                setActiveClass(activeElement);
-            }
-        }
     });
-    
 }).call(this);
