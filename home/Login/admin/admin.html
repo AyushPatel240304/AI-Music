@@ -12,7 +12,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.2/tailwind.min.css"
     />
     <link rel="stylesheet" href="admin.css" />
-    
   </head>
   <body>
     <ul class="background">
@@ -34,36 +33,35 @@
       <li></li>
       <li></li>
       <li></li>
-   </ul>
-      <!-- navigation  -->
+    </ul>
+    <!-- navigation  -->
     <script defer src="../../home.js"></script>
 
     <nav id="slide-menu">
       <ul>
-          <li><a href="../../home.html" class="active">Home</a></li>
-          <li><a href="../../dash/dash.html">Dashboard</a></li>
-          <li><a href="../../Profile/profile.html">Profile</a></li>
-          <li><a href="../login.html">Log in</a></li>
+        <li><a href="../../home.html" class="active">Home</a></li>
+        <li><a href="../../dash/dash.html">Dashboard</a></li>
+        <li><a href="../../Profile/profile.html">Profile</a></li>
+        <li><a href="../login.html">Log in</a></li>
       </ul>
-  </nav>
+    </nav>
     <div id="content">
       <div class="menu-trigger"></div>
-  
       <!-- Navigation Ends -->
-  <div class="main_container">
-    <form action="">
-      <h1>Sign in</h1>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" spellcheck=false required placeholder="Email" autocomplete="off" />
-        <label for="email">Password</label>
-        <input type="password" required placeholder="Password" autocomplete="off" />
-        <button type="submit" class="submitbtn">Login</button> 
+      <div class="main_container">
+        <form id="loginForm">
+          <h1>Sign in</h1>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" spellcheck=false required placeholder="Username" autocomplete="off" />
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Password" autocomplete="off" />
+            <button type="submit" class="submitbtn">Login</button>
+          </div>
+        </form>
+        <p id="loginMessage"></p>
       </div>
-    </form>
-  </div>
-  </div>
-
-
+    </div>
+    <script src="admin.js"></script>
   </body>
 </html>

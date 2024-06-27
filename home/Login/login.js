@@ -9,5 +9,5 @@
 
     // Add click event listener for button2
     button2.addEventListener('click', function() {
-        window.location.href = 'user/user.html'; // Replace with actual URL for user page
+        window.location.href = 'user/login.php'; // Replace with actual URL for user page
     });

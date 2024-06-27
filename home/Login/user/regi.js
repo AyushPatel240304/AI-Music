@@ -5,14 +5,14 @@ const loginEmailInput = document.getElementById('loginEmail');
 const signupEmailInput = document.getElementById('signupEmail');
 const loginPasswordInput = document.getElementById('loginPassword');
 const signupPasswordInput = document.getElementById('signupPassword');
-const phoneNumberInput = document.getElementById('phoneNumber');
+// const phoneNumberInput = document.getElementById('phoneNumber');
 
 fullNameInput.addEventListener('input', handleFullNameChange);
 loginEmailInput.addEventListener('input', handleLoginEmailChange);
 signupEmailInput.addEventListener('input', handleSignupEmailChange);
 loginPasswordInput.addEventListener('input', handleLoginPasswordChange);
 signupPasswordInput.addEventListener('input', handleSignupPasswordChange);
-phoneNumberInput.addEventListener('input', handlePhoneNumberChange);
+// phoneNumberInput.addEventListener('input', handlePhoneNumberChange);
 
 // Validation message elements
 
@@ -21,7 +21,7 @@ const loginEmailMessage = document.getElementById('LoginMassage');
 const signupEmailMessage = document.getElementById('signupmessage');
 const loginPasswordMessage = document.getElementById('passwordMessage');
 const signupPasswordMessage = document.getElementById('rpass');
-const phoneNumberMessage = document.getElementById('phoneMessage');
+// const phoneNumberMessage = document.getElementById('phoneMessage');
 
 // Validation functions
 
@@ -39,9 +39,9 @@ function validatePassword(password) {
   return passwordRegex.test(password.trim());
 }
 
-function validatePhoneNumber(phoneNumber) {
-  return phoneNumber.trim().length === 10 && !isNaN(phoneNumber);
-}
+// function validatePhoneNumber(phoneNumber) {
+//   return phoneNumber.trim().length === 10 && !isNaN(phoneNumber);
+// }
 
 // Event handler functions for updating validation messages
 
@@ -94,13 +94,21 @@ function handleSignupPasswordChange(event) {
   }
 }
 
-function handlePhoneNumberChange(event) {
-  const phoneNumber = event.target.value;
-  if (validatePhoneNumber(phoneNumber)) {
-    phoneNumberMessage.textContent = '';
-  } else {
-    phoneNumberMessage.textContent = 'Enter your phone number';
-  }
-}
+// button bahaviour 
+var btn24 = document.getElementById('btn24');
+btn24.addEventListener('click', function() {
+  window.location.href = '../../Profile/profile.html';
+});
+
+
+
+// function handlePhoneNumberChange(event) {
+//   const phoneNumber = event.target.value;
+//   if (validatePhoneNumber(phoneNumber)) {
+//     phoneNumberMessage.textContent = '';
+//   } else {
+//     phoneNumberMessage.textContent = 'Enter your phone number';
+//   }
+// }
 
 // (Optional) Function to handle form submission (assuming validation logic is implemented elsewhere)

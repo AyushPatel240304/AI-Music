@@ -1,3 +1,67 @@
+<?php
+session_start();
+
+include('db.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_POST['register'])) {
+        $name = $_POST['name'];
+        // $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        // Validation
+        $errors = [];
+
+        if (empty($name)) {
+            $errors[] = "Name is required";
+        }
+
+        // if (!preg_match("/^[0-9]{10}$/", $phone)) {
+        //     $errors[] = "Phone number must be 10 digits";
+        // }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/@(gmail|yahoo|outlook)\.com$/", $email)) {
+            $errors[] = "Invalid email. Only gmail.com, yahoo.com, or outlook.com allowed";
+        }
+
+        if (!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/", $password)) {
+            $errors[] = "Password must be at least 8 characters long and contain at least one number, one uppercase letter, one lowercase letter, and one special character";
+        }
+
+        if (empty($errors)) {
+            $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+
+            if ($conn->query($sql) === TRUE) {
+                $_SESSION['loggedin'] = true;
+                header("location: login.php");
+                exit();
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        } else {
+            foreach ($errors as $error) {
+                echo $error . "<br>";
+            }
+        }
+    } elseif(isset($_POST['l_email']) && isset($_POST['l_pass'])) {
+        $email = $_POST['l_email'];
+        $password = $_POST['l_pass'];
+
+        $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $_SESSION['loggedin'] = true;
+            header("Location: ../../Profile/profile.html");
+            exit();
+        } else {
+            echo "Invalid email or password";
+        }
+    }
+}
+?>
+
 
 <!-- HTML goes here -->
 <!DOCTYPE html>
@@ -8,12 +72,14 @@
   <title>Login</title>
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="user.css">
+  <link rel="stylesheet" href="login.css">
 </head>
-<body class="anima">
+<body class="anima" >
   <div class="fade-zoom-in-effect">
-    <form id="regi" method="post" action="">
-      <div class="section">
+
+    <form id="regi" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    
+    <div class="section">
         <div class="container">
           <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
@@ -37,7 +103,7 @@
                             <i class="input-icon uil uil-lock-alt"></i>
                             <div id="passwordMessage"></div> <!-- Placeholder for password validation message -->
                           </div>
-                          <button class="btn mt-4" type="submit">Login</button>
+                          <button class="btn mt-4" type="submit" id="btn24">Login</button>
                           <p class="mb-0 mt-4 text-center"><a href="#" class="link">Forgot your password?</a></p>
                         </div>
                       </div>
@@ -51,7 +117,11 @@
                             <div id="fname"></div>
                             <i class="input-icon uil uil-user"></i>
                           </div>  
-                          
+                          <!-- <div class="form-group mt-2">
+                            <input type="tel" id="phoneNumber" class="form-style" placeholder="Phone Number" name="phone">
+                            <i class="input-icon uil uil-phone"></i>
+                            <div id="phoneMessage"></div> Placeholder for phone number validation message
+                          </div>   -->
                           <div class="form-group mt-2">
                             <input type="email" id="signupEmail" class="form-style" placeholder="Email" name="email">
                             <div id="signupmessage"></div>
