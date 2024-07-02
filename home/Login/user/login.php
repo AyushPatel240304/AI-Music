@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div id="passwordMessage"></div> <!-- Placeholder for password validation message -->
                           </div>
                           <button class="btn mt-4" type="submit" id="btn24">Login</button>
-                          <p class="mb-0 mt-4 text-center"><a href="#" class="link">Forgot your password?</a></p>
+                          <p class="mb-0 mt-4 text-center"><a href="../forgot/forgot.php" class="link">Forgot your password?</a></p>
                         </div>
                       </div>
                     </div>
