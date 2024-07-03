@@ -33,7 +33,7 @@ $conn->close();
     <link rel="stylesheet" href="prof.css">
     <script defer src="../home.js"></script>
 </head>
-<body>
+<>
     <nav id="slide-menu">
         <ul>
             <li><a href="../home.html" class="active">Home</a></li>
@@ -131,6 +131,8 @@ $conn->close();
                 </div>
             </button>
         </div>
-    </div>
+</div>
+
+    
 </body>
 </html>

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "Name is required";
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/@(gmail|yahoo|outlook)\.com$/", $email)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) ||!preg_match("/@(gmail|yahoo|outlook)\.com$/", $email)) {
             $errors[] = "Invalid email. Only gmail.com, yahoo.com, or outlook.com allowed";
         }
 
@@ -25,40 +25,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (empty($errors)) {
-            $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+            // Encrypt password using password_hash()
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$hashed_password')";
 
             if ($conn->query($sql) === TRUE) {
                 header("Location: login.php");
                 exit();
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "Error: ". $sql. "<br>". $conn->error;
             }
         } else {
             foreach ($errors as $error) {
-                echo $error . "<br>";
+                echo $error. "<br>";
             }
         }
     } elseif (isset($_POST['l_email']) && isset($_POST['l_pass'])) {
         $email = $_POST['l_email'];
         $password = $_POST['l_pass'];
 
-        $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+        $sql = "SELECT * FROM users WHERE email='$email'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            $_SESSION['loggedin'] = true;
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key in your users table
-            header("Location: ../../Profile/profile.php");
-            exit();
+            $hashed_password = $user['password'];
+
+            // Verify password using password_verify()
+            if (password_verify($password, $hashed_password)) {
+                $_SESSION['loggedin'] = true;
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key in your users table
+                header("Location:../../Profile/profile.php");
+                exit();
+            } else {
+                echo "Invalid email or password";
+            }
         } else {
             echo "Invalid email or password";
         }
     }
 }
 ?>
-
 
 <!-- HTML goes here -->
 <!DOCTYPE html>
