@@ -64,3 +64,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 mysqli_close($conn);
 ?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BeatsBuddy</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.0.2/tailwind.min.css"
+    />
+    <link rel="stylesheet" href="send-email.css" />
+  </head>
+  <body>
+    <ul class="background">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <div id="content">
+      <div class="main_container">
+        <form id="loginForm" method="post" action="send-email.php">
+          <h1>Verify OTP</h1>
+          <div class="form-group">
+            <label for="email">Enter OTP Sent to your mail</label>
+            <input type="number" id="number" name="number" required placeholder="123456" autocomplete="off" autofocus />
+            <!-- <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="Password" autocomplete="off" /> -->
+            <button type="submit" class="submitbtn">SUBMIT</button>
+          </div>
+        </form>
+        <p id="loginMessage"></p>
+      </div>
+    </div>
+    <script src="forgot.js"></script>
+  </body>
+</html>

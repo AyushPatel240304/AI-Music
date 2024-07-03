@@ -33,8 +33,6 @@
     </ul>
 
     <div id="content">
-
-      <!-- Navigation Ends -->
       <div class="main_container">
         <form id="loginForm" method="post" action="send-email.php">
           <h1>Password Reset</h1>
