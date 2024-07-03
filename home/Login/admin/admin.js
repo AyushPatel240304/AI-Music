@@ -13,7 +13,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         loginMessage.textContent = 'Login successful!';
         // Redirect to profile page after a short delay
         setTimeout(() => {
-            window.location.href = '../../Profile/profile.html';
+            window.location.href = '../../Profile/profile.php';
         }, 1000); // 1-second delay for user feedback
     } else {
         loginMessage.style.color = 'red';

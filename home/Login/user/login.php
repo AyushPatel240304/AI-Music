@@ -4,9 +4,8 @@ session_start();
 include('db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_POST['register'])) {
+    if (isset($_POST['register'])) {
         $name = $_POST['name'];
-        // $phone = $_POST['phone'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
@@ -16,10 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($name)) {
             $errors[] = "Name is required";
         }
-
-        // if (!preg_match("/^[0-9]{10}$/", $phone)) {
-        //     $errors[] = "Phone number must be 10 digits";
-        // }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match("/@(gmail|yahoo|outlook)\.com$/", $email)) {
             $errors[] = "Invalid email. Only gmail.com, yahoo.com, or outlook.com allowed";
@@ -33,8 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
 
             if ($conn->query($sql) === TRUE) {
-                $_SESSION['loggedin'] = true;
-                header("location: login.php");
+                header("Location: login.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
@@ -44,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo $error . "<br>";
             }
         }
-    } elseif(isset($_POST['l_email']) && isset($_POST['l_pass'])) {
+    } elseif (isset($_POST['l_email']) && isset($_POST['l_pass'])) {
         $email = $_POST['l_email'];
         $password = $_POST['l_pass'];
 
@@ -52,8 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
             $_SESSION['loggedin'] = true;
-            header("Location: ../../Profile/profile.html");
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key in your users table
+            header("Location: ../../Profile/profile.php");
             exit();
         } else {
             echo "Invalid email or password";
