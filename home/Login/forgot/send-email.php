@@ -37,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'smtpserver133@gmail.com';                 // SMTP username
-            $mail->Password   = 'xwab nztf utfd ggtq';                 // SMTP password
+            $mail->Username   = 'abc@example.com';                 // SMTP username
+            $mail->Password   = 'passkey';                 // SMTP password
             $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption
             $mail->Port       = 587;                                    // TCP port to connect to
 
