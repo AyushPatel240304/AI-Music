@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,7 +47,6 @@
             <button type="submit" class="submitbtn">Send Code</button>
           </div>
         </form>
-        <p id="loginMessage"></p>
       </div>
     </div>
     <script src="forgot.js"></script>

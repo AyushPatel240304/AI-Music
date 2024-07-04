@@ -52,18 +52,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Body    = 'Your password reset code is: '. $code;
 
             $mail->send();
-            echo 'Password reset code sent to your email.';
+            echo '<script>alert("Password reset code sent to your email."); window.location.href = "send-email.php";</script>';
         } catch (Exception $e) {
-            echo 'Failed to send password reset code.';
+            echo '<script>alert("Failed to send password reset code.")</script>';
         }
     } else {
-        echo 'Email not found in database.';
+        echo '<script>alert("Email not found in database."); window.location.href = "forgot.php";</script>';
     }
 }
 
 mysqli_close($conn);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
